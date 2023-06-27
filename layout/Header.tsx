@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Wallet from '../components/wallet';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import classNames from 'classnames/bind';
-import Router, { useRouter } from 'next/router';
-import { route } from 'next/dist/server/router';
 import styles from '../styles/layout.module.scss';
-import { concat } from 'ethers/lib/utils';
-const cx = classNames.bind(styles);
 
 const Header = () => {
-  const [openState, setopenState] = useState(false);
-
-  const router = useRouter();
   const [account, setAccount] = useState('');
 
   const connectWallet = async () => {
