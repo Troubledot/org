@@ -12,31 +12,40 @@ const Home = () => {
   return (
     <div className={styles.wrapper}>
       <Wallet />
-      <Controller>
-        <Scene triggerHook="onLeave" duration="300%" pin>
-          <Timeline wrapper={<div className={styles.pinContainer} />}>
-            <section className={styles.panel + ' ' + styles.first}>
-              <Earth />
-              <div className={styles.container}>
-                <h1>ORIGIN</h1>
-              </div>
-            </section>
-            <Tween from={{ x: '-100%' }} to={{ x: '0%' }}>
-              <section className={styles.panel + ' ' + styles.turqoise}>
-                <span>Panel</span>
-              </section>
-            </Tween>
-            <Tween from={{ x: '100%' }} to={{ x: '0%' }}>
-              <section className={styles.panel + ' ' + styles.green}>
-                <span>Panel</span>
-              </section>
-            </Tween>
-            <Tween from={{ y: '-100%' }} to={{ y: '0%' }}>
-              <section className={styles.panel + ' ' + styles.bordeaux}>
-                <span>Panel</span>
-              </section>
-            </Tween>
-          </Timeline>
+      <Controller globalSceneOptions={{ triggerHook: 'onLeave' }}>
+        <Scene triggerHook="onLeave" duration={500} pin>
+          <Scene triggerElement="#trigger" duration={160}>
+            {(progress: any) => (
+              <Tween
+                to={{
+                  background: '#000000'
+                }}
+                totalProgress={progress}
+                paused
+              >
+                <section className={styles.panel + ' ' + styles.first}>
+                  <div id="trigger" className={styles.triggerH1} />
+                  <Earth />
+                  <Scene triggerElement="#trigger" duration={160}>
+                    {(progress: any) => (
+                      <Tween
+                        to={{
+                          opacity: 0
+                        }}
+                        totalProgress={progress}
+                        paused
+                      >
+                        <h1>ORIGIN</h1>
+                      </Tween>
+                    )}
+                  </Scene>
+                </section>
+              </Tween>
+            )}
+          </Scene>
+        </Scene>
+        <Scene>
+          <section className={styles.panel + ' ' + styles.second}></section>
         </Scene>
       </Controller>
     </div>
