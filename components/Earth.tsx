@@ -13,7 +13,7 @@ const Box = (props: JSX.IntrinsicElements['group']) => {
   const spriteMaterial: SpriteMaterialProps = {
     map: useLoader(TextureLoader, '/texture/earth-glow.png'),
     transparent: true,
-    opacity: 0.4
+    opacity: 0.3
   };
 
   return (
@@ -33,7 +33,7 @@ const Box = (props: JSX.IntrinsicElements['group']) => {
           opacity={0.4}
         />
       </mesh>
-      <sprite scale={20} position={[0, 7.2, 1.7]}>
+      <sprite scale={35} position={[0, 0, 0]}>
         <spriteMaterial {...spriteMaterial}></spriteMaterial>
       </sprite>
     </group>
@@ -56,13 +56,13 @@ const Stars = (props: JSX.IntrinsicElements['mesh']) => {
   );
 };
 
-const Earth = () => {
+const Earth = (props: JSX.IntrinsicElements['group']) => {
   return (
     <Canvas>
       <ambientLight intensity={3.8} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={8} />
       <pointLight position={[0, 0, 0]} intensity={8} />
-      <Box position={[0, -17.5, 0]} />
+      <Box {...props} />
       <Stars />
     </Canvas>
   );
